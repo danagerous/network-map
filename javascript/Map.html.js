@@ -12,10 +12,6 @@ CUR.MapPage = (function() {
     
     var _respondent;
     
-    //var _networkLinks;
-    //var markers = [];
-    //var linkLines = [];
-    
     var toggleShowBusy = function(busy){
         _infoPanel.toggleShowBusy(busy);
     };
@@ -39,12 +35,7 @@ CUR.MapPage = (function() {
         queryNetworkLinks(respondent.Id);
     };
     
-    var queryNetworkLinks = function(id){
-        
-        //var queryText = encodeURIComponent("SELECT AnswerID, OrgName, FullGeoAddress, GeoAddress, GeoCity, GeoState, GeoZip, Website, Geocoded FROM 4183834 WHERE RespondID=" + id + " ORDER BY OrgName");
-        //var query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq=' + queryText); 
-        //query.send(handleNetworkQueryResponse);
-        
+    var queryNetworkLinks = function(id){        
         _googleQuery.getNetworkLinksByRespondent(id, handleNetworkQueryResponse);
     };
     
@@ -59,7 +50,6 @@ CUR.MapPage = (function() {
                     geocodeOrg(id, address, count);  
                 })(i + 1, table.getValue(i,0), {OrgName: table.getValue(i,1), FullGeoAddress: table.getValue(i,2), GeoAddress: table.getValue(i,3), GeoCity: table.getValue(i,4), GeoState: table.getValue(i,5), GeoZip: table.getValue(i,6), Website: table.getValue(i,7), Geocoded: table.getValue(i,8)});
             }
-            //_infoPanel.renderNetworkLinks(table);  
         }  
         toggleShowBusy(false);
 
@@ -73,23 +63,11 @@ CUR.MapPage = (function() {
         } else {
             _geocoder.geocode({'address': address}, 
                 function(results, status) {
-                    //alert(status + ' ' + geocoded);
                     if (status == google.maps.GeocoderStatus.OK){
-                        //alert(count + ' GEOCODED');
                         _map.renderNetworkLink(id, results[0].geometry.location, count); 
                     } else {
-                        //alert(count + ' ' + status);
                         if(status === google.maps.GeocoderStatus.OVER_QUERY_LIMIT){
-                            //alert(count + ' OVERLIMIT');
                             _geocodingProcesses.push( setTimeout(function(){geocodeOrg(id, address, count)}, 500) );
-    //                                    _geocoder.geocode({'address': address}, 
-    //                                        function(results, status) {
-    //                                            if (status == google.maps.GeocoderStatus.OK){
-    //                                                alert(count + ' GEOCODED');
-    //                                                _map.renderNetworkLink(id, results[0].geometry.location, count); 
-    //                                            } 
-    //                                        }
-    //                                    );  
                         } else {
                             _infoPanel.setNetworkLinkGeocodeStatus(id, false);
                         }
@@ -99,154 +77,6 @@ CUR.MapPage = (function() {
             ); 
         }
     };
-    
-//    var addRespondentToMap = function(respondent){
-//        var marker = new CustomMarker(respondent.latLng, _map, 'R', 'respondent');
-//        markers.push(marker);
-//            
-//        google.maps.event.addListener(marker, "mouseover", function(e,b,c) {
-//            marker.div_.setAttribute('class', 'respondent-highlight');
-//        });
-//        
-//        google.maps.event.addListener(marker, "mouseout", function(e,b,c) {
-//            marker.div_.setAttribute('class', 'respondent');
-//        });
-//    
-//    };
-
-//    var onRespondentLayerClick = function(e){
-//        var latLng = e.latLng;
-//        
-//        _infoPanel.renderRespondent(e);
-//                
-//        var respondId = e.row['RespondID'].value;
-
-////
-//        var queryText = encodeURIComponent("SELECT AnswerID, OrgName, FullGeoAddress, GeoAddress, GeoCity, GeoState, GeoZip, Website FROM 4183834 WHERE RespondID=" + respondId + "");
-//        var query = new google.visualization.Query('http://www.google.com/fusiontables/gvizdata?tq=' + queryText);
-//      
-//        var ul = $('#networkLinks');
-//        ul.empty();
-//        if (markers) {
-//            for (i in markers) {
-//                markers[i].setMap(null);
-//            }
-//            markers.length = 0;
-//        }
-//        if (linkLines) {
-//            for (i in linkLines) {
-//                linkLines[i].setMap(null);
-//            }
-//            linkLines.length = 0;
-//        }
-
-//        var marker = new CustomMarker(latLng, _map, 'R', 'respondent');
-//        markers.push(marker);
-//            
-//        google.maps.event.addListener(marker, "mouseover", function(e,b,c) {
-//            marker.div_.setAttribute('class', 'respondent-highlight');
-//        });
-//        
-//        google.maps.event.addListener(marker, "mouseout", function(e,b,c) {
-//            marker.div_.setAttribute('class', 'respondent');
-//        });
-//        
-
-//        query.send(
-//            function(response){
-//                var table = response.getDataTable();
-//                if(table !== null){
-//                
-//                    for (var i=0, len=table.getNumberOfRows(); i<len; i++){
-//                        var address = table.getValue(i,2);
-//                        (function(count){
-//                            _geocoder.geocode({'address': address}, 
-//                                function(results, status) {
-//                                    if (status == google.maps.GeocoderStatus.OK){
-//                                        _map.renderNetworkLink(results[0].geometry.location, count);
-//                                    
-////                                        var marker2 = new CustomMarker(results[0].geometry.location, _map, count, 'labels');
-////                                        markers.push(marker2);
-////                                                
-////                                        google.maps.event.addListener(marker2, "mouseover", function(e) {
-////                                            marker2.div_.setAttribute('class', 'labels-highlight');
-////                                        });
-////                                        google.maps.event.addListener(marker2, "mouseout", function(e) {
-////                                            marker2.div_.setAttribute('class', 'labels');
-////                                        });
-////                                        
-////                                        
-////                                        
-////                                        
-////                                        
-////                                        
-////                                        
-////                                        var lineCoords = [
-////                                            latLng,
-////                                            results[0].geometry.location
-////                                        ];
-////                                        
-////                                        
-////                                        var linkLine2 = new google.maps.Polyline({
-////                                            path: lineCoords,
-////                                            strokeColor: "#000000",
-////                                            strokeOpacity: 0.8,
-////                                            strokeWeight: 7,
-////                                            geodesic: true
-////                                        });
-////                                        linkLine2.setMap(_map);
-////                                        linkLines.push(linkLine2);
-////                                        
-////                                        var linkLine = new google.maps.Polyline({
-////                                            path: lineCoords,
-////                                            strokeColor: "#CCCCCC",
-////                                            strokeOpacity: 1,
-////                                            strokeWeight: 5,
-////                                            geodesic: true
-////                                        });
-////                                        linkLine.setMap(_map);
-////                                        linkLines.push(linkLine);
-//                                        
-//                                        
-//                                        
-//                                        
-//                                        
-//                                        
-//                                    }
-//                                }
-//                            );
-//                        })(i + 1);
-//                    }
-
-//                    
-//                    _infoPanel.renderNetworkLinks(table);  
-//                }  
-//            }
-//        );
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        return false;
-//    
-//    };
 
     return{
         init: function(config){

@@ -27,7 +27,6 @@ CUR.Map = function(config){
     var myOptions = {
         zoom: 8,
         center: new google.maps.LatLng(50.0267110, -116.907234),
-        //center: new google.maps.LatLng(40.7711329, -73.8741874),
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         overviewMapControl:true,
         overviewMapControlOptions:{opened:true}
@@ -37,16 +36,45 @@ CUR.Map = function(config){
         myOptions
     );
 
+    //Load Fusion Tables
     var layer = new google.maps.FusionTablesLayer({
         query: {
-            //select: 'FullGeoAddress',
-            select: 'GeoZip',
+            select: 'FullGeoAddress',
             from: '1PAQGJi5iiAGig88llfKnN5GGf8Z_7gJ5139wY-4m'
-            //from: '3824029'
-        },
-        suppressInfoWindows:true
+            },
+        suppressInfoWindows:true,
+        styles: [{
+            markerOptions:{ 
+                iconName: "small_green"
+            }
+        }]
     });
+
     layer.setMap(_map);
+
+    //EXPERIMENTAL SECTION//
+
+    // Load GeoJSON.
+    //var poly = map.data.loadGeoJson('http://mapping.twigtech.ca/kcp/kcpBndry.geojson');
+
+    // Set the stroke width for geoJSON polygon
+    /*map.data.setStyle({
+        fillOpacity: 0.1,
+        strokeColor: 'red',
+        strokeWeight: 2,
+        clickable: false
+        });*/
+    
+    // show the infowindow when user mouses-over
+    /*marker.addListener('mouseover', function() {
+        infowindow.open(_map, this);
+    });*/
+
+    // hide the infowindow when user mouses-out
+    /*marker.addListener('mouseout', function() {
+        infowindow.close();
+    });*/
+
     google.maps.event.addListener(layer, 'click', onRespondentLayerClick);
     
     return {
@@ -80,9 +108,6 @@ CUR.Map = function(config){
             google.maps.event.addListener(_networkLinks[id], 'mouseover', function(e) {
                 CUR.MapPage.highlightNetworkLink(id);
             });
-//            google.maps.event.addListener(_networkLinks[id], 'mousemove', function(e) {
-//                CUR.MapPage.highlightNetworkLink(id);
-//            });
             google.maps.event.addListener(_networkLinks[id], 'mouseout', function(e) {
                 CUR.MapPage.unhighlightNetworkLink(id);
             });

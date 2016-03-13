@@ -25,16 +25,6 @@ CUR.InfoPanel = function(config){
         _respondent.empty();
         _respondent.append(
             $('<div class="respondent" style="float:left;cursor:pointer;"><p>O</p></div>') //Changed R to O
-//                .mouseover(
-//                    function(e){
-//                        CUR.MapPage.highlightRespondent();
-//                    }
-//                ).
-//                mouseout(
-//                    function(e){
-//                        CUR.MapPage.unhighlightRespondent();
-//                    }
-//                )
         );
         
         
@@ -44,17 +34,11 @@ CUR.InfoPanel = function(config){
         if(org.GeoAddress || org.GeoCity){
             textDiv.append('<span style="display:block;">' + org.GeoCity + ' ' + org.GeoState +'</span>');
         }
-        /* Removed GeoAddress and GeoZip
-        {
-            textDiv.append('<span style="display:block;">' + org.GeoAddress+ '</span>').
-                append('<span style="display:block;">' + org.GeoCity + ' ' + org.GeoState + ', ' + org.GeoZip +'</span>');
-        } */
         else {
             textDiv.append('<span style="display:block;">' + org.FullGeoAddress.replace(/\\n/g, '<br />') + '</span>');
         }
             
         textDiv.append('<a href="' + org.Website + '" style="display:block;" target="_blank">' + org.Website + '</a>').
-            //append('<a href="http://www.oasisnyc.net/stewardship/organizationdetails.aspx?id=' + org.Id + '" style="display:block;" target="_blank">SEE ME ON OASIS!</a>').
             append($('<div class="linkButton">Zoom to me</div>').
                 click(
                     function(e){
@@ -89,26 +73,10 @@ CUR.InfoPanel = function(config){
         );
         item.append( 
             $('<div class="labels" style="float:left;cursor:pointer;"><p>' + rowIdx + '</p></div>')
-//            .mouseover(
-//                function(e){
-//                    CUR.MapPage.highlightNetworkLink(id);                         
-//                }
-//            ).mouseout(
-//                function(e){
-//                    CUR.MapPage.unhighlightNetworkLink(id);
-//                }
-//            ).click(
-//                function(e){
-//                                                
-//                }
-//            )
         );
         var p = $('<p style="margin:0;margin-top:4px;padding-left:32px;padding-top:2px;"><span style="font-weight:bold;">' + attr['OrgName'] + '</span></p>'); //<span style="color:#AAAAAA;">(' + id +')</span></p>');
         p.append('<span style="display:block;">' + attr['GeoCity'] + ' ' + attr['GeoState'].replace(/\\n/g, '<br />') + '</span>'). //Changed FullGeoAddress to GeoCity and GeoState
-            //append('<span style="display:block;">ADDRESS' + table.getValue(i,3) + '</span>').
-            //append('<span style="display:block;">CITY' + table.getValue(i,4) + ' ' + table.getValue(i,5) + ', ' + table.getValue(i,6) +'</span>').
             append('<a href="' + attr['Website'] + '" style="display:block;" target="_blank">' + attr['Website'] + '</a>').
-            //append('<a href="http://www.oasisnyc.net/stewardship/organizationdetails.aspx?id=' + id + '" style="display:block;" target="_blank">SEE ME ON OASIS!</a>').
             append( 
                 $('<div class="linkButton">Zoom to me</div>').
                     click(
@@ -117,38 +85,12 @@ CUR.InfoPanel = function(config){
                         }
                     )
             );
-//            append(
-//                $('<div class="linkButton">See my network</div>').
-//                    click(
-//                        function(e){
-//                            var latLng = CUR.MapPage.getLatLngById(id);
-//                            CUR.MapPage.setRespondent({
-//                                latLng: latLng,
-//                                Id: id, 
-//                                OrgName: attr['OrgName'], 
-//                                FullGeoAddress: attr['FullGeoAddress'],
-//                                GeoAddress: attr['GeoAddress'], 
-//                                GeoCity: attr['GeoCity'],
-//                                GeoState: attr['GeoState'], 
-//                                GeoZip: attr['GeoZip'],
-//                                Website: attr['Website']
-//                            });
-//                        }
-//                    )
-//            );
-
-        
+       
         item.append(p);
         _network.append(item);
         _networkLinks[id] = item;
         
     };
-    
-//    var renderNetworkLinks = function(table){
-//        for(var i=0,len=table.getNumberOfRows(); i<len; i++){
-//            _network.append(renderNetworkLink(table, i));
-//        }
-//    };
     
     
     return {
