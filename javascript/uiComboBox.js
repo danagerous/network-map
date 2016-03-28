@@ -1,4 +1,4 @@
-﻿$.widget( "ui.combobox", {
+$.widget( "ui.combobox", {
 	_create: function() {
 		var input,
 			self = this,
@@ -17,20 +17,12 @@
 				delay: 0,
 				minLength: 0,
 				source: function( request, response ) {
-					//var matcher = new RegExp( '^' + $.ui.autocomplete.escapeRegex(request.term), "i" );
-					var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
-					
+					var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );				
 					
 					response( select.children( "option" ).map(function() {
 						var text = $( this ).text();
 						if ( this.value && ( !request.term || matcher.test(text) ) )
 							return {
-//										label: text.replace(
-//											new RegExp(
-//												"(?![^&;]+;)(?!<[^<>]*)(" +
-//												$.ui.autocomplete.escapeRegex(request.term) +
-//												")(?![^<>]*>)(?![^&;]+;)", "gi"
-//											), "<strong>$1</strong>" ),
                                 label: text,
 								value: text,
 								option: this
@@ -74,7 +66,6 @@
 
 		$( "<a>" )
 			.attr( "tabIndex", -1 )
-			//.attr( "title", "Show All Items" )
 			.appendTo( wrapper )
 			.button({
 				icons: {

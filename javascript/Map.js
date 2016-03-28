@@ -22,19 +22,30 @@ CUR.Map = function(config){
         };
         CUR.MapPage.setRespondent(respondent);
     };
-    
 
     var myOptions = {
         zoom: 8,
-        center: new google.maps.LatLng(50.0267110, -116.907234),
+        center: new google.maps.LatLng(50.342441, -116.519321),
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         overviewMapControl:true,
         overviewMapControlOptions:{opened:true}
     };
+
     _map = new google.maps.Map(
         document.getElementById('map'),
         myOptions
     );
+
+    // Load GeoJSON - KCP Boundary
+    _map.data.loadGeoJson('http://mapping.twigtech.ca/kcp/kcpBndry.geojson');
+
+    // Set the stroke width for geoJSON polygon
+    _map.data.setStyle({
+        fillOpacity: 0.1,
+        strokeColor: 'red',
+        strokeWeight: 2,
+        clickable: false
+        });
 
     //Load Fusion Tables
     var layer = new google.maps.FusionTablesLayer({
@@ -45,40 +56,32 @@ CUR.Map = function(config){
         suppressInfoWindows:true,
         styles: [{
             markerOptions:{ 
-                iconName: "small_green"
+                iconName: "small_blue"
             }
         }]
     });
-
+    
     layer.setMap(_map);
 
-    //EXPERIMENTAL SECTION//
-
-    // Load GeoJSON.
-    //var poly = map.data.loadGeoJson('http://mapping.twigtech.ca/kcp/kcpBndry.geojson');
-
-    // Set the stroke width for geoJSON polygon
-    /*map.data.setStyle({
-        fillOpacity: 0.1,
-        strokeColor: 'red',
-        strokeWeight: 2,
-        clickable: false
-        });*/
-    
-    // show the infowindow when user mouses-over
-    /*marker.addListener('mouseover', function() {
-        infowindow.open(_map, this);
-    });*/
-
-    // hide the infowindow when user mouses-out
-    /*marker.addListener('mouseout', function() {
-        infowindow.close();
-    });*/
-
+    // Fusion Tips to allow tool tip on hover
+    /*layer.enableMapTips({
+        select: "OrgName", // pulls list of columns to query, can have only one column
+        from: "1PAQGJi5iiAGig88llfKnN5GGf8Z_7gJ5139wY-4m", // pulls fusion table 
+        geometryColumn: "FullGeoAddress", // pulls geometry column name, may be Address for a points map
+        suppressMapTips: false, // optional, whether to show map tips. default false
+        delay: 100, // pulls milliseconds mouse pause before send a server query. default 300.
+        tolerance: 50, // pulls tolerance in pixel around mouse. default is 6. want a bigger number for point maps
+        googleApiKey: "AIzaSyA1Paa_gWGVcqOOzk2EtrXjzGzLu4O3tN4" // pulls API key. Get from Google API console https://code.google.com/apis/console
+        });
+        
+    google.maps.event.addListener(layer, 'mouseover', function(fEvent) {
+            var row = fEvent.row;
+        });
+    */
     google.maps.event.addListener(layer, 'click', onRespondentLayerClick);
-    
+
     return {
-        map: _map,
+        map: _map,     
         renderRespondent: function(latLng){
             if(_respondent){
                 _respondent.setMap(null);
@@ -102,8 +105,7 @@ CUR.Map = function(config){
             }
             _linkLines = {};
         },
-        renderNetworkLink: function(id, latLng, label){
-        
+        renderNetworkLink: function(id, latLng, label){        
             _networkLinks[id] = (new CustomMarker(latLng, _map, label, 'labels'));
             google.maps.event.addListener(_networkLinks[id], 'mouseover', function(e) {
                 CUR.MapPage.highlightNetworkLink(id);
@@ -194,6 +196,5 @@ CUR.Map = function(config){
             }
             
         }
-    
     };
 };

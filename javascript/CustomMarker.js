@@ -1,4 +1,4 @@
-﻿function CustomMarker(latlng, map, text, cssClass) {
+function CustomMarker(latlng, map, text, cssClass) {
     this.latlng_ = latlng;
 
     this.text_ = text;
@@ -20,16 +20,11 @@
       // Create a overlay text DIV
       div = this.div_ = document.createElement('DIV');
       // Create the DIV representing our CustomMarker
-      //div.style.border = "none";
       div.style.position = "absolute";
       div.style.paddingLeft = "0px";
       div.style.cursor = 'pointer';
       
       div.setAttribute('class', this.cssClass_);
-
-//      var img = document.createElement("img");
-//      img.src = "http://gmaps-samples.googlecode.com/svn/trunk/markers/circular/bluecirclemarker.png";
-//      div.appendChild(img);
 
       var p = document.createElement("p");
       p.appendChild(document.createTextNode(this.text_));
@@ -46,10 +41,6 @@
       google.maps.event.addDomListener(div, "mouseout", function(event) {
         google.maps.event.trigger(me, "mouseout");
       });
-      
-//      google.maps.event.addDomListener(div, "mousemove", function(event) {
-//        google.maps.event.trigger(me, "mousemove");
-//      });
 
       // Then add the overlay to the DOM
       var panes = this.getPanes();

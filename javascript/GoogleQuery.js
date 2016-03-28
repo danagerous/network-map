@@ -36,7 +36,7 @@ CUR.GoogleQuery = function(config){
         },
         
         getNetworkLinksByRespondent: function(id, callback){
-            var queryText = encodeURIComponent("SELECT AnswerID, OrgName, FullGeoAddress, GeoAddress, GeoCity, GeoState, GeoZip, Website, Geocoded FROM 15KtqMmt_TZUxBhgmmOoi1bblFHl0PcdBI0Tt0EDN WHERE RespondID=" + id + " ORDER BY OrgName"); // 4183834 https://www.google.com/fusiontables/data?dsrcid=4183834#rows:id=1
+            var queryText = encodeURIComponent("SELECT AnswerID, OrgName, FullGeoAddress, GeoAddress, GeoCity, GeoState, GeoZip, Website FROM 15KtqMmt_TZUxBhgmmOoi1bblFHl0PcdBI0Tt0EDN WHERE RespondID=" + id + " ORDER BY OrgName"); // 4183834 https://www.google.com/fusiontables/data?dsrcid=4183834#rows:id=1
             var query = new google.visualization.Query(VISUALIZATION_BASE_URL + queryText); 
             query.send(
                 function(response){

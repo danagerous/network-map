@@ -48,7 +48,7 @@ CUR.MapPage = (function() {
                 (function(count, id, attr){
                     _infoPanel.renderNetworkLink(id, count, attr);
                     geocodeOrg(id, address, count);  
-                })(i + 1, table.getValue(i,0), {OrgName: table.getValue(i,1), FullGeoAddress: table.getValue(i,2), GeoAddress: table.getValue(i,3), GeoCity: table.getValue(i,4), GeoState: table.getValue(i,5), GeoZip: table.getValue(i,6), Website: table.getValue(i,7), Geocoded: table.getValue(i,8)});
+                })(i + 1, table.getValue(i,0), {OrgName: table.getValue(i,1), FullGeoAddress: table.getValue(i,2), GeoAddress: table.getValue(i,3), GeoCity: table.getValue(i,4), GeoState: table.getValue(i,5), GeoZip: table.getValue(i,6), Website: table.getValue(i,7)});
             }
         }  
         toggleShowBusy(false);
