@@ -24,7 +24,7 @@ CUR.Map = function(config){
     };
 
     var myOptions = {
-        zoom: 8,
+        zoom: 7,
         center: new google.maps.LatLng(50.342441, -116.519321),
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         overviewMapControl:true,
@@ -64,20 +64,22 @@ CUR.Map = function(config){
     layer.setMap(_map);
 
     // Fusion Tips to allow tool tip on hover
-    /*layer.enableMapTips({
+    layer.enableMapTips({
         select: "OrgName", // pulls list of columns to query, can have only one column
         from: "1PAQGJi5iiAGig88llfKnN5GGf8Z_7gJ5139wY-4m", // pulls fusion table 
         geometryColumn: "FullGeoAddress", // pulls geometry column name, may be Address for a points map
         suppressMapTips: false, // optional, whether to show map tips. default false
         delay: 100, // pulls milliseconds mouse pause before send a server query. default 300.
-        tolerance: 50, // pulls tolerance in pixel around mouse. default is 6. want a bigger number for point maps
+        tolerance: 15, // pulls tolerance in pixel around mouse. default is 6. want a bigger number for point maps
         googleApiKey: "AIzaSyA1Paa_gWGVcqOOzk2EtrXjzGzLu4O3tN4" // pulls API key. Get from Google API console https://code.google.com/apis/console
         });
         
-    google.maps.event.addListener(layer, 'mouseover', function(fEvent) {
-            var row = fEvent.row;
-        });
-    */
+    function addListeners() {
+      google.maps.event.addListener(layer, 'mouseover', function(fEvent) {
+        var row = fEvent.row;
+      });
+    }
+    
     google.maps.event.addListener(layer, 'click', onRespondentLayerClick);
 
     return {
