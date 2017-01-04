@@ -6,3 +6,5 @@ Code credits to Stewardship Mapping and Assessment project from the US Forest Se
 http://www.stewmap.net/network-diagrams/
 
 http://www.urbanresearchmaps.org
+
+Added Derek Eder's [fusiontips](https://github.com/derekeder/fusiontips)
