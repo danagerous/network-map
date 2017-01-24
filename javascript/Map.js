@@ -37,7 +37,7 @@ CUR.Map = function(config){
     );
 
     // Load GeoJSON - KCP Boundary
-    _map.data.loadGeoJson('kcpBndry.geojson');
+    _map.data.loadGeoJson('/kcpBndry.geojson');
 
     // Set the stroke width for geoJSON polygon
     _map.data.setStyle({
