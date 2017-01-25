@@ -9,4 +9,4 @@ http://www.urbanresearchmaps.org
 
 Uses:
 
-@derekeder 's [fusiontips](https://github.com/derekeder/fusiontips)
+[@derekeder](https://github.com/derekeder)'s [fusiontips](https://github.com/derekeder/fusiontips)
