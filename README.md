@@ -7,4 +7,6 @@ http://www.stewmap.net/network-diagrams/
 
 http://www.urbanresearchmaps.org
 
-Added Derek Eder's [fusiontips](https://github.com/derekeder/fusiontips)
+Uses:
+
+@derekeder 's [fusiontips](https://github.com/derekeder/fusiontips)
