@@ -1,5 +1,7 @@
 # network-map
 
+Kootenay Conservation Program map showing network connection of partners.
+
 Created Using:
 
 1. [Google Fusion Tables](https://support.google.com/fusiontables/answer/2571232)
