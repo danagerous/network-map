@@ -7,5 +7,5 @@ Created Using:
 3. [fusiontips](https://github.com/derekeder/fusiontips)
 
 Code credits:
-[Stewardship Mapping and Assessment project - US Forest Service](http://www.stewmap.net/network-diagrams/)
-[Urban Research](http://www.urbanresearchmaps.org)
+- [Stewardship Mapping and Assessment project - US Forest Service](http://www.stewmap.net/network-diagrams/)
+- [Urban Research](http://www.urbanresearchmaps.org)
