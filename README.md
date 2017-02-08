@@ -1,12 +1,11 @@
 # network-map
-Network mapping code using Google Maps API V3
 
-Code credits to Stewardship Mapping and Assessment project from the US Forest Service and Urban Research Maps.
+Created Using:
 
-http://www.stewmap.net/network-diagrams/
+[Google Fusion Tables](https://support.google.com/fusiontables/answer/2571232)
+[Google Maps API V3](https://developers.google.com/maps/web/)
+[fusiontips](https://github.com/derekeder/fusiontips)
 
-http://www.urbanresearchmaps.org
-
-Uses:
-
-[@derekeder](https://github.com/derekeder)'s [fusiontips](https://github.com/derekeder/fusiontips)
+Code credits:
+[Stewardship Mapping and Assessment project - US Forest Service](http://www.stewmap.net/network-diagrams/)
+[Urban Research](http://www.urbanresearchmaps.org)
