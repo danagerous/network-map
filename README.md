@@ -1,4 +1,4 @@
-# network-map
+# Network Map
 
 Kootenay Conservation Program map showing network connection of partners.
 
